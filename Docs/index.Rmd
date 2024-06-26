@@ -1,0 +1,121 @@
+---
+title: "R Tutorial for Soundscape Analysis using PAMGuide and Acoustic Indices"
+author: "Ben Gottesman"
+date: "2024-06-25"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Part 1:
+
+#Welcome to R!
+
+Basic R Syntax
+
+Let's start with some basic commands in R. Open RStudio and try the following in the console:
+
+```{r C2}
+
+# This is a comment in R. Comments are ignored by the R interpreter.
+# You can write notes or explanations here.
+
+# Basic arithmetic operations
+1 + 1  # Addition
+2 * 3  # Multiplication
+5 / 2  # Division
+4 - 3  # Subtraction
+
+# Assigning values to variables
+x <- 10  # Assign 10 to variable x
+y <- 20  # Assign 20 to variable y
+
+# Print values of variables
+print(x)
+print(y)
+
+# Simple operations with variables
+z <- x + y  # Add x and y, store result in z
+print(z)
+```
+
+# Question 1
+
+In your study, you are working with four recorders. Each recorder is in the field for 1 month and recording continuously. How much data will 4 recorders deployed for 1 month generate? Write an equation below to determine the answer:
+
+Hint: The size of an audio file = Sampling Rate (Hz) \* Duration (in seconds) \* 2. This size is in bytes. To convert from bytes to gigabytes, divide by 1 billion (1,000,000,000).
+
+# Working with Vectors
+
+Vectors are one of the basic data structures in R. They are like arrays in other programming languages:
+
+```{r C3}
+# Creating a vector
+
+numbers <- c(1, 2, 3, 4, 5) 
+print(numbers)
+
+# Basic operations on vectors
+
+sum(numbers) # Sum of all elements 
+mean(numbers) # Mean (average) of all elements 
+length(numbers) # Number of elements in the vector
+
+# Accessing elements of a vector
+
+print(numbers[1]) # First element 
+print(numbers[2:4]) # Second to fourth elements 
+```
+
+# Question 2:
+
+You have collected recordings from bird calls recorded at your field site in Sabah, Malaysia. In Raven Pro, you have calculated the "Center Frequency" for each of the songs. Which of these species has the highest center frequency?
+
+Oriental Magpie-Robin (Species 1): 2.3, 2.5, 2.8, 2.9, 3.0
+
+Blue-winged Pitta (Species 2): 2.1, 2.9, 1.9, 3.0, 2.8
+
+Greater Racket-tailed Drongo (Species 3): 2.1, 2.4, 2.5, 2.5, 1.9
+
+# Data Frames
+
+Data frames are used for storing data tables. A data frame is a list of vectors of equal length.
+
+Below, we will create a dataframe of with the total number of helmeted hornbill detections at 10 sites inside and outside Gunung Gading National Park where acoustic recorders were deployed for 1 week.
+
+```{r C4}
+
+# Create the dataframe
+df_hornbill <- data.frame(
+  species = rep("Helmeted Hornbill", 10),
+  canopy_cover = c(70.00, 28.33, 95.00, 8.23, 19.00, 86.67, 53.33, 45.00, 61.67, 78.33),
+  detections = c(20, 0, 34, 0, 0, 18, 2, 3, 7, 8),
+  protection_status = c('Yes','No','Yes','No','No','Yes','No','Yes','No','Yes')
+)
+
+# Print the dataframe
+print(df_hornbill)
+
+# Accessing elements in a data frame
+print(df_hornbill$species)    # Column 'name'
+print(df_hornbill$canopy_cover[2])  # Second element in column 'age'
+```
+
+# Basic Plotting
+
+R is great for creating visualizations. Let's plot this data to see whether there was an effect of canopy cover and protection status on hornbill detections.
+
+```{r C5}
+
+# Basic scatter plot
+plot.new() # clear any prior plots 
+plot(df_hornbill$canopy_cover, df_hornbill$detections, main = "Calls detected vs. canopy cover", xlab = "Canopy cover (%)", ylab = "Total calls detected", col = ifelse(df_hornbill$protection_status == "Yes", "green", "red"), pch = 16)
+
+# Adding a legend
+legend("topleft", legend = c("National park", "Surrounding area"), col = c("green", "red"), pch = 16)
+
+```
+
+# 
