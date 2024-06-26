@@ -1,0 +1,11 @@
+title: TS7 Bioacoustics in R
+description: >- # this means to ignore newlines until "baseurl:"
+  Documentation for the TS7 Bioacoustics in R project.
+baseurl: "" # the subpath of your site, e.g., /blog
+url: "https://yourusername.github.io" # the base hostname & protocol for your site
+theme: minima
+plugins:
+  - jekyll-feed
+
+source: .
+destination: ./_site
